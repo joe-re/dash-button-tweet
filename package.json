@@ -17,6 +17,7 @@
     "dash-button": "^2.0.0",
     "electron": "^1.4.11",
     "oauth": "^0.9.14",
+    "photon": "github:connors/photon",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-redux": "^4.4.6",
@@ -25,9 +26,11 @@
   "devDependencies": {
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.9",
+    "babel-plugin-transform-flow-strip-types": "^6.18.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
     "css-loader": "^0.26.1",
+    "flow-bin": "^0.36.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0"
   }

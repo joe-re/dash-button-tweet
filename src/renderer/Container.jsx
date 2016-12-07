@@ -1,11 +1,12 @@
+// @flow
+
 import React from 'react';
+import UI from './components/UI';
 
 export default class Container extends React.Component {
   render() {
     return (
-      <div>
-        <h1>Hello, World!</h1>
-      </div>
+      <UI />
     );
   }
 }
