@@ -22,17 +22,24 @@ app.on('ready', () => {
     shell.openExternal(authUrl);
     win.loadURL(`file://${__dirname}/../../index.html`);
 
-    ipcMain.once('SEND_PIN', (_e, args) => {
+    ipcMain.once('SEND_PIN', (event, args) => {
       const oauthVerifier = args.pin;
       oauth.getOAuthAccessToken(
         oauthToken,
         oauthTokenSecret,
         oauthVerifier,
-        (_error, accessToken, accessTokenSecret) => {
+        (_error, accessToken, secret) => {
           console.log('accessToken', accessToken);
-          console.log('accessTokenSecret', accessTokenSecret);
+          console.log('accessTokenSecret', secret);
+          event.sender.send('SEND_ACCESS_TOKEN', { accessToken, secret });
         }
       );
     });
   });
+});
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
 });

@@ -1,12 +1,32 @@
 // @flow
 
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import UI from './components/UI';
+import * as Actions from './actions';
 
-export default class Container extends React.Component {
+
+class Container extends React.Component {
   render() {
+    console.log(this.props);
     return (
-      <UI />
+      <UI {...this.props}/>
     );
   }
 }
+
+function mapStateToProps(state) {
+  return state.accessToken;
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Container);

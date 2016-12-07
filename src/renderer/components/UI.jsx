@@ -2,33 +2,23 @@
 
 import React from 'react';
 import { ipcRenderer } from 'electron';
+import PinCodeInput from './PinCodeInput';
 
-type State = { pinCode: string };
 export default class UI extends React.Component {
-  state: State;
-
-  constructor(props: any) {
-    super(props);
-    this.state = { pinCode: '' };
-  }
-  handleChange(e: SyntheticEvent) {
-    const target = e.target;
-    if (target instanceof HTMLInputElement) {
-      this.setState({ pinCode: target.value });
-    }
+  componentDidMount() {
+    ipcRenderer.on('SEND_ACCESS_TOKEN', (e, payload) => {
+      this.props.actions.setAccessToken(payload);
+    });
   }
 
-  handleSubmit(_e: SyntheticEvent) {
-    ipcRenderer.send('SEND_PIN', { pin: this.state.pinCode });
+  componentWillUnmount() {
+    ipcRenderer.removeAllListeners();
   }
 
   render() {
     return (
       <div>
-        <label>Please enter, pin-code
-          <input value={this.state.pinCode} onChange={this.handleChange.bind(this)}/>
-        </label>
-        <button onClick={this.handleSubmit.bind(this)}>Submit</button>
+        <PinCodeInput {...this.props}/>
       </div>
     );
   }
