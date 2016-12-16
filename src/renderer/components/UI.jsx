@@ -6,7 +6,8 @@ import PinCodeInput from './PinCodeInput';
 
 export default class UI extends React.Component {
   componentDidMount() {
-    ipcRenderer.on('SEND_ACCESS_TOKEN', (e, payload) => {
+    this.props.actions.fetchAccessToken();
+    ipcRenderer.on('SEND_ACCESS_TOKEN', (_e, payload) => {
       this.props.actions.setAccessToken(payload);
     });
   }

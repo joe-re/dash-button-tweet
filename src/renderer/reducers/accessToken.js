@@ -12,10 +12,10 @@ const initialState: State = {
 };
 
 const accessToken = (state: State = initialState, action: ActionTypes): State => {
+  console.log(action);
   switch (action.type) {
   case 'SET_ACCESS_TOKEN':
-    debugger;
-    return { accessToken: action.accessToken, secret: action.secret };
+    return { accessToken: action.token, secret: action.secret };
   default:
     return state;
   }

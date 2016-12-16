@@ -9,7 +9,6 @@ import * as Actions from './actions';
 
 class Container extends React.Component {
   render() {
-    console.log(this.props);
     return (
       <UI {...this.props}/>
     );
